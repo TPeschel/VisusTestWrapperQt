@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QProcess>
 #include <QClipboard>
+#include <QCloseEvent>
+#include "csv.hpp"
 
 namespace Ui {
 	class MainWidget;
@@ -31,8 +33,17 @@ class MainWidget : public QWidget
 		void slotNewExamination( );
         void slotScanSIC( );
         void slotFinishExamination( );
-        void slotStartFrACT();
-        void slotFrACTFinished(QClipboard::Mode m);
+        void slotStartFrACT( );
+        void slotFrACTFinished( QClipboard::Mode m );
+
+    public:
+
+        void closeEvent( QCloseEvent *p_closeEvent );
+
+    public:
+
+        CSV
+        csv;
 };
 
 #endif // MAINWIDGET_HPP

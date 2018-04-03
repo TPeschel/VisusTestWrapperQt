@@ -28,7 +28,8 @@ SOURCES += \
         mainwidget.cpp
 
 HEADERS += \
-        mainwidget.hpp
+        mainwidget.hpp \
+    csv.hpp
 
 FORMS += \
         mainwidget.ui

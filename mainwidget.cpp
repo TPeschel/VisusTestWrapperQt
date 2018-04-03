@@ -1,8 +1,9 @@
 #include "mainwidget.hpp"
 #include "ui_mainwidget.h"
 #include <QString>
+#include <QTime>
 #include <iostream>
-
+#include "csv.hpp"
 
 MainWidget::MainWidget(QWidget *parent) :
 	QWidget(parent),
@@ -25,6 +26,9 @@ MainWidget::MainWidget(QWidget *parent) :
     cb = QApplication::clipboard( );
 
     QObject::connect( cb, SIGNAL( changed( QClipboard::Mode ) ), this, SLOT( slotFrACTFinished( QClipboard::Mode ) ) );
+
+    csv.sep( '\t' );
+    csv.loadFromFile( "data.csv" );
 }
 
 MainWidget::~MainWidget()
@@ -71,37 +75,43 @@ void MainWidget::slotStartFrACT(  )
     arg << "FrACT3.9.8.swf";
 
     proc->setWorkingDirectory ( "." );
-//    proc->startDetached ( "flashplayer_29_sa.exe", arg ); //windows
+
+//  proc->startDetached ( "flashplayer_29_sa.exe", arg ); //windows
     proc->startDetached ( "./flashplayer", arg ); //linux
-//    fract->startDetached ( "FrACT3.10.0b.exe", arg );
-//    proc->waitForFinished ( );
-
-//    QClipboard *cb = QApplication::clipboard( );
-
-//    ui->plainTextEdit->appendPlainText( cb->text( QClipboard::Clipboard ) );
-
-//    delete fract;
 }
 
 void MainWidget::slotFrACTFinished( QClipboard::Mode m )
 {
-    //proc->blockSignals( true );
+    //cb->blockSignals( false );
 
-    cb->blockSignals( true );
+    //proc->blockSignals( true );
 
     QString
     txt = cb->text( m );
 
-    std::cout << txt.toStdString( ) << std::endl;
+    std::cout << QTime::currentTime( ).msec( ) << " : >> " << txt.toStdString( ) << std::endl;
+
+    csv.loadFromString( txt );
 
     ui->plainTextEdit->blockSignals( true );
     ui->plainTextEdit->appendPlainText( txt );
     ui->plainTextEdit->blockSignals( false );
 
-    //cb->clear( );
-
+    cb->blockSignals( true );
+    cb->clear( );
     cb->blockSignals( false );
-    proc->blockSignals( false );
+
+    //proc->blockSignals( false );
+
+}
+
+void MainWidget::closeEvent(QCloseEvent *p_closeEvent)
+{
+
+    p_closeEvent->accept( );
+
+    csv.writeToFile( "daten.csv" );
+    //MainWidget::closeEvent(p_closeEvent );
 }
 
 
