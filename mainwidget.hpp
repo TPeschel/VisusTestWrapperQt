@@ -19,9 +19,6 @@ class MainWidget : public QWidget
 		explicit MainWidget(QWidget *parent = 0);
 		~MainWidget();
 
-    QClipboard
-    *cb;
-
     QProcess
     *proc;
 
@@ -34,7 +31,7 @@ class MainWidget : public QWidget
         void slotScanSIC( );
         void slotFinishExamination( );
         void slotStartFrACT( );
-        void slotFrACTFinished( QClipboard::Mode m );
+        void slotFrACTFinished( int exitCode );
 
     public:
 
@@ -43,7 +40,7 @@ class MainWidget : public QWidget
     public:
 
         CSV
-        csv;
+        csv_output;
 };
 
 #endif // MAINWIDGET_HPP

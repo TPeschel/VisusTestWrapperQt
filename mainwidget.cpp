@@ -22,13 +22,11 @@ MainWidget::MainWidget(QWidget *parent) :
     QObject::connect( ui->pushButtonOSWithTrialFrame, SIGNAL( released( ) ), this, SLOT( slotStartFrACT( ) ) );
     QObject::connect( ui->pushButtonODWithHoleAperture, SIGNAL( released( ) ), this, SLOT( slotStartFrACT( ) ) );
     QObject::connect( ui->pushButtonOSWithHoleAperture, SIGNAL( released( ) ), this, SLOT( slotStartFrACT( ) ) );
+    QObject::connect( ui->pushButtonClose, SIGNAL( released( ) ), this, SLOT( close( ) ) );
 
-    cb = QApplication::clipboard( );
-
-    QObject::connect( cb, SIGNAL( changed( QClipboard::Mode ) ), this, SLOT( slotFrACTFinished( QClipboard::Mode ) ) );
-
-    csv.sep( '\t' );
-    csv.loadFromFile( "data.csv" );
+    csv_output.name( "data.csv" );
+    csv_output.sep( "[\n\t\r ]+" );
+    csv_output.loadFromFile( "data.csv" );
 }
 
 MainWidget::~MainWidget()
@@ -45,10 +43,10 @@ void MainWidget::slotNewExamination( )
     ui->lineEditSICVal->setText( "" );
 }
 
-void MainWidget::slotScanSIC()
+void MainWidget::slotScanSIC( )
 {
     QString scannedSIC = ui->lineEditSICVal->text( );
-    QRegularExpression re( "LI\\d{8}", QRegularExpression::CaseInsensitiveOption );
+    QRegularExpression re( "^LI\\d{8}", QRegularExpression::CaseInsensitiveOption );
     QRegularExpressionMatch m = re.match( scannedSIC );
 
     if( m.hasMatch( ) ) {
@@ -57,6 +55,7 @@ void MainWidget::slotScanSIC()
         ui->toolBox->setItemText( 1, m.captured( 0 ) );
     }
 }
+
 void MainWidget::slotFinishExamination( )
 {
     ui->toolBox->setCurrentIndex( 3 );
@@ -70,47 +69,63 @@ void MainWidget::slotStartFrACT(  )
 
     proc = new QProcess( );
 
+    QObject::connect( proc, SIGNAL(finished(int)),this,SLOT( slotFrACTFinished(int)));
+
     QStringList arg;
 
     arg << "FrACT3.9.8.swf";
 
-    proc->setWorkingDirectory ( "." );
+    proc->setWorkingDirectory ( "C:/Users/Thomas Peschel/Documents/dev/c++/life/Franziska/github.com/TPeschel/build-VisusTestWrapper-Desktop_Qt_5_10_1_MinGW_32bit-Debug" );
 
-//  proc->startDetached ( "flashplayer_29_sa.exe", arg ); //windows
-    proc->startDetached ( "./flashplayer", arg ); //linux
+    proc->start( "flashplayer_29_sa.exe", arg ); //windows
+//    proc->startDetached ( "./flashplayer", arg ); //linux
 }
 
-void MainWidget::slotFrACTFinished( QClipboard::Mode m )
+void MainWidget::slotFrACTFinished( int exitCode )
 {
-    //cb->blockSignals( false );
+
+    if( exitCode != 0 )
+
+        return;
+
+//    cb->blockSignals( true );
 
     //proc->blockSignals( true );
 
     QString
-    txt = cb->text( m );
+    txt = QApplication::clipboard( )->text( QClipboard::Clipboard );
 
-    std::cout << QTime::currentTime( ).msec( ) << " : >> " << txt.toStdString( ) << std::endl;
+    QTime
+    tm = QTime::currentTime( );
 
+    std::cout << tm.hour( ) << ":" << tm.minute( ) << ":" << tm.second( ) << "." << tm.msec( ) << " : >> " << txt.toStdString( ) << std::endl;
+
+    CSV
+    csv( "clipboard.csv" );
+
+    csv.sep( "[\t\n\r ]+" );
     csv.loadFromString( txt );
 
-    ui->plainTextEdit->blockSignals( true );
-    ui->plainTextEdit->appendPlainText( txt );
-    ui->plainTextEdit->blockSignals( false );
+    if( 0 < csv.size( ) && csv[ 0 ][ 0 ] == '2' ) {
 
+        ui->plainTextEdit->appendPlainText( txt );
+
+        csv_output.append( csv );
+    }
+/*
     cb->blockSignals( true );
     cb->clear( );
     cb->blockSignals( false );
-
+*/
     //proc->blockSignals( false );
-
 }
 
 void MainWidget::closeEvent(QCloseEvent *p_closeEvent)
 {
 
     p_closeEvent->accept( );
-
-    csv.writeToFile( "daten.csv" );
+http://doc.qt.io/qt-5/qtxml-streambookmarks-example.html
+     csv_output.writeToFile( "data.csv" );
     //MainWidget::closeEvent(p_closeEvent );
 }
 

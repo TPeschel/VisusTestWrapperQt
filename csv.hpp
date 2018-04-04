@@ -5,6 +5,7 @@
 #include <QStringList>
 #include <QFile>
 #include <QTextStream>
+#include <QRegExp>
 
 class CSV :
 public QObject {
@@ -14,19 +15,19 @@ public QObject {
     private:
 
         QString
-        name;
+        __name;
 
-        QChar
+        QString
         __sep;
 
         QStringList
-        items;
+        __items;
 
     public:
 
-        CSV( QString const &p_name = "daten.csv", QChar const & p_sep = ',' ) :
-        name( p_name ),
-        __sep( p_sep ) {
+        CSV( QString const &p_name = "data.csv" ) :
+        __name( p_name ),
+        __sep( "," ) {
 
         }
 
@@ -35,8 +36,26 @@ public QObject {
 
         }
 
-        QChar
-        sep( QChar const &p_sep = ',' ) {
+        QString
+        & operator [ ] ( int const &p_i ) {
+
+            return __items[ p_i ];
+        }
+
+        int
+        size( ) const {
+
+            return __items.length( );
+        }
+
+        QString
+        & name( QString const &p_name ) {
+
+            return __name = p_name;
+        }
+
+        QString
+        sep( QString const &p_sep = "," ) {
 
             if( !p_sep.isNull( ) )
 
@@ -49,20 +68,20 @@ public QObject {
         loadFromFile( QString const & p_filename, bool p_setFileNameAsName = false ) {
 
             QFile
-            csv_file( p_filename );
+            csv_file( p_filename.isEmpty() ? __name : p_filename );
 
             if( csv_file.open( QIODevice::ReadOnly ) ) {
 
                 QString
                 txt = csv_file.readAll( );
 
-                items = txt.split( __sep );
+                __items.append( txt.split( QRegExp( __sep ), QString::KeepEmptyParts ) );
 
                 csv_file.close( );
 
                 if( p_setFileNameAsName )
 
-                    name = p_filename;
+                    __name = p_filename;
 
                 return true;
             }
@@ -71,25 +90,35 @@ public QObject {
         }
 
         void
+        append( CSV & p_csv ) {
+
+            for( int i = 0; i < p_csv.size( ); ++ i ) {
+
+                __items.append( p_csv[ i ] );
+            }
+        }
+
+        void
         loadFromString( QString const &p_text ) {
 
-            items.append( p_text.split( __sep ) );
+            __items.append( p_text.split( QRegExp( __sep ), QString::KeepEmptyParts ) );
+//            __items.append( p_text.split( __sep ) );
         }
 
         void
         writeToFile( QString const & p_filename ) {
 
             QFile
-            csv_file( p_filename );
+            csv_file( p_filename.isEmpty( ) ? __name : p_filename );
 
-            if( csv_file.open( QIODevice::ReadWrite | QIODevice::Text ) ) {
+            if( csv_file.open( QIODevice::WriteOnly | QIODevice::Text ) ) {
 
                 QTextStream
                 ts( &csv_file );
 
-                for( auto it = items.cbegin( ); it != items.cend( ); ++ it ) {
+                for( auto it = __items.cbegin( ); it != __items.cend( ); ++ it ) {
 
-                    ts << *it << __sep;
+                    ts << *it;
                 }
 
                 csv_file.close( );
