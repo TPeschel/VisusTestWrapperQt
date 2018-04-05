@@ -24,7 +24,7 @@ MainWidget::MainWidget(QWidget *parent) :
     QObject::connect( ui->pushButtonOSWithHoleAperture, SIGNAL( released( ) ), this, SLOT( slotStartFrACT( ) ) );
     QObject::connect( ui->pushButtonClose, SIGNAL( released( ) ), this, SLOT( close( ) ) );
 
-    csv_output.name( "data.csv" );
+    csv_output.name( "daten.csv" );
     csv_output.sep( "[\n\t\r ]+" );
     csv_output.loadFromFile( "data.csv" );
 }
