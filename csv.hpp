@@ -70,7 +70,7 @@ public QObject {
         loadFromFile( QString const & p_filename, bool p_setFileNameAsName = false ) {
 
             QFile
-            csv_file( p_filename.isEmpty() ? __name : p_filename );
+            csv_file( p_filename.isEmpty( ) ? __name : p_filename );
 
             if( csv_file.open( QIODevice::ReadOnly ) ) {
 
@@ -120,7 +120,7 @@ public QObject {
 
                 for( auto it = __items.cbegin( ); it != __items.cend( ); ++ it ) {
 
-                    ts << ( *it ).toLatin1( );
+                    ts << ( *it ).toLatin1( ) << "\t";
                 }
 
                 csv_file.close( );

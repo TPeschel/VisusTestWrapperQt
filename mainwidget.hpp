@@ -41,14 +41,14 @@ class MainWidget : public QWidget {
         QString
         currSIC;
 
-        enum Modes {
+        enum Acuity_LandoltCModes {
 
-            Acuity_LandoltCODWithoutTrialFrame,
-            Acuity_LandoltCOSWithoutTrialFrame,
-            Acuity_LandoltCODWithTrialFrame,
-            Acuity_LandoltCOSWithTrialFrame,
-            Acuity_LandoltCODWithHoleAperture,
-            Acuity_LandoltCOSWithHoleAperture
+            ODWithoutTrialFrame,
+            OSWithoutTrialFrame,
+            ODWithTrialFrame,
+            OSWithTrialFrame,
+            ODWithHoleAperture,
+            OSWithHoleAperture
         }
         currMode;
 
@@ -57,6 +57,7 @@ class MainWidget : public QWidget {
 		void slotNewExamination( );
         void slotScanSIC( );
         void slotFinishExamination( );
+        void slotNextExamination( );
         void slotFrACTFinished( int exitCode );
         void slotStartFrACTAcuity_LandoltCODWithoutTrialFrame( );
         void slotStartFrACTAcuity_LandoltCOSWithoutTrialFrame( );

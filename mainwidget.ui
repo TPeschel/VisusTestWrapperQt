@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>704</width>
-    <height>672</height>
+    <width>682</width>
+    <height>684</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="font">
    <font>
@@ -22,6 +28,12 @@
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <widget class="QToolBox" name="toolBox">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
      <property name="currentIndex">
       <number>0</number>
      </property>
@@ -30,8 +42,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>686</width>
-        <height>542</height>
+        <width>662</width>
+        <height>552</height>
        </rect>
       </property>
       <attribute name="label">
@@ -39,38 +51,6 @@
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0">
-        <widget class="QGroupBox" name="groupBoxParameters">
-         <property name="title">
-          <string>Parameters</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_3">
-          <item row="0" column="0">
-           <widget class="QToolButton" name="toolButton">
-            <property name="text">
-             <string>working dir ...</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="labelWorkingDirVal">
-            <property name="text">
-             <string>c:/</string>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-            <property name="margin">
-             <number>2</number>
-            </property>
-            <property name="textInteractionFlags">
-             <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse|Qt::TextBrowserInteraction|Qt::TextEditable|Qt::TextEditorInteraction|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="1" column="0">
         <widget class="QPushButton" name="pushButtonNewExamination">
          <property name="minimumSize">
           <size>
@@ -80,7 +60,7 @@
          </property>
          <property name="font">
           <font>
-           <pointsize>16</pointsize>
+           <pointsize>32</pointsize>
           </font>
          </property>
          <property name="text">
@@ -95,8 +75,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>686</width>
-        <height>773</height>
+        <width>669</width>
+        <height>552</height>
        </rect>
       </property>
       <attribute name="label">
@@ -176,36 +156,14 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>686</width>
-        <height>773</height>
+        <width>669</width>
+        <height>552</height>
        </rect>
       </property>
       <attribute name="label">
        <string>Examination</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_6">
-       <item row="1" column="0">
-        <widget class="QPushButton" name="pushButtonFinishExamination">
-         <property name="font">
-          <font>
-           <pointsize>16</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>finish</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0">
-        <widget class="QPlainTextEdit" name="plainTextEdit"/>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>summary</string>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="0">
         <widget class="QGroupBox" name="groupBoxExamination">
          <property name="title">
@@ -215,6 +173,84 @@
           <set>Qt::AlignCenter</set>
          </property>
          <layout class="QGridLayout" name="gridLayout_7">
+          <item row="3" column="2">
+           <widget class="QPushButton" name="pushButtonOSWithTrialFrame">
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Visus OS with Trial Frame</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QPushButton" name="pushButtonODWithTrialFrame">
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Visus OD with Trial Frame</string>
+            </property>
+           </widget>
+          </item>
+          <item row="10" column="1" colspan="2">
+           <widget class="Line" name="line_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="2">
+           <widget class="QLabel" name="labelOSWithHoleApertureMsg">
+            <property name="text">
+             <string>no measurement needed</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1" colspan="2">
+           <widget class="Line" name="line">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1" colspan="2">
+           <widget class="Line" name="line_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLabel" name="labelODWithTrialFrame">
+            <property name="text">
+             <string>still no value measured</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="2" rowspan="2">
+           <widget class="QLabel" name="labelOSWithHoleAperture">
+            <property name="text">
+             <string>still no value measured</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="1">
            <widget class="QLabel" name="labelODWithoutTrialFrame">
             <property name="text">
@@ -225,21 +261,8 @@
             </property>
            </widget>
           </item>
-          <item row="12" column="2">
-           <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLabel" name="labelODWithTrialFrame">
+          <item row="8" column="1" rowspan="2">
+           <widget class="QLabel" name="labelODWithHoleAperture">
             <property name="text">
              <string>still no value measured</string>
             </property>
@@ -248,13 +271,25 @@
             </property>
            </widget>
           </item>
-          <item row="6" column="2">
-           <widget class="QLabel" name="labelOSWithHoleAperture">
+          <item row="1" column="2">
+           <widget class="QLabel" name="labelOSWithoutTrialFrame">
             <property name="text">
              <string>still no value measured</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QPushButton" name="pushButtonODWithHoleAperture">
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Visus OD with Hole Aperture</string>
             </property>
            </widget>
           </item>
@@ -276,39 +311,7 @@
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
-           <widget class="QPushButton" name="pushButtonODWithHoleAperture">
-            <property name="font">
-             <font>
-              <pointsize>16</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Visus OD with Hole Aperture</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QLabel" name="labelOSWithoutTrialFrame">
-            <property name="text">
-             <string>still no value measured</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="2">
-           <widget class="QLabel" name="labelOSWithTrialFrame">
-            <property name="text">
-             <string>still no value measured</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="2">
+          <item row="7" column="2">
            <widget class="QPushButton" name="pushButtonOSWithHoleAperture">
             <property name="font">
              <font>
@@ -317,6 +320,16 @@
             </property>
             <property name="text">
              <string>Visus OS with Hole Aperture</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QLabel" name="labelOSWithTrialFrame">
+            <property name="text">
+             <string>still no value measured</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -344,55 +357,8 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="2">
-           <widget class="QPushButton" name="pushButtonOSWithTrialFrame">
-            <property name="font">
-             <font>
-              <pointsize>16</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Visus OS with Trial Frame</string>
-            </property>
-           </widget>
-          </item>
           <item row="6" column="1">
-           <widget class="QLabel" name="labelODWithHoleAperture">
-            <property name="text">
-             <string>still no value measured</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QPushButton" name="pushButtonODWithTrialFrame">
-            <property name="font">
-             <font>
-              <pointsize>16</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Visus OD with Trial Frame</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
            <widget class="QLabel" name="labelODWithHoleApertureMsg">
-            <property name="text">
-             <string>no measurement needed</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="2">
-           <widget class="QLabel" name="label_2">
             <property name="text">
              <string>no measurement needed</string>
             </property>
@@ -407,14 +373,52 @@
          </layout>
         </widget>
        </item>
-       <item row="3" column="0">
-        <widget class="QTableView" name="tableView"/>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="pushButtonFinishExamination">
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>finish</string>
+         </property>
+        </widget>
        </item>
        <item row="2" column="0">
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>comment</string>
+        <widget class="QSplitter" name="splitter">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
+         <widget class="QGroupBox" name="groupBox">
+          <property name="title">
+           <string>summary</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="0" column="0">
+            <widget class="QPlainTextEdit" name="plainTextEditSummary">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="baseSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::TabFocus</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </widget>
        </item>
       </layout>
@@ -424,15 +428,15 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>686</width>
-        <height>773</height>
+        <width>669</width>
+        <height>552</height>
        </rect>
       </property>
       <attribute name="label">
        <string>Summary</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_8">
-       <item row="0" column="0">
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0" colspan="2">
         <widget class="QTabWidget" name="tabWidget">
          <property name="tabPosition">
           <enum>QTabWidget::South</enum>
@@ -466,9 +470,26 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QPushButton" name="pushButtonClose">
+        <widget class="QPushButton" name="pushButtonNewExaminationAfterFinish">
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
          <property name="text">
-          <string>Svedish!</string>
+          <string>Prepare for new proband</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="pushButtonClose">
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Exit</string>
          </property>
         </widget>
        </item>
