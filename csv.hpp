@@ -20,6 +20,8 @@ public QObject {
         QString
         __sep;
 
+    public:
+
         QStringList
         __items;
 
@@ -118,7 +120,7 @@ public QObject {
 
                 for( auto it = __items.cbegin( ); it != __items.cend( ); ++ it ) {
 
-                    ts << *it;
+                    ts << ( *it ).toLatin1( );
                 }
 
                 csv_file.close( );

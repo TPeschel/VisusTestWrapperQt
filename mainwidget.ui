@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>584</width>
-    <height>586</height>
+    <width>704</width>
+    <height>672</height>
    </rect>
   </property>
   <property name="font">
@@ -30,8 +30,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>566</width>
-        <height>456</height>
+        <width>686</width>
+        <height>542</height>
        </rect>
       </property>
       <attribute name="label">
@@ -95,8 +95,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>566</width>
-        <height>456</height>
+        <width>686</width>
+        <height>773</height>
        </rect>
       </property>
       <attribute name="label">
@@ -176,8 +176,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>566</width>
-        <height>456</height>
+        <width>686</width>
+        <height>773</height>
        </rect>
       </property>
       <attribute name="label">
@@ -186,6 +186,11 @@
       <layout class="QGridLayout" name="gridLayout_6">
        <item row="1" column="0">
         <widget class="QPushButton" name="pushButtonFinishExamination">
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>finish</string>
          </property>
@@ -211,9 +216,12 @@
          </property>
          <layout class="QGridLayout" name="gridLayout_7">
           <item row="1" column="1">
-           <widget class="QLabel" name="labelODWithoutHoleApertue">
+           <widget class="QLabel" name="labelODWithoutTrialFrame">
             <property name="text">
              <string>still no value measured</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -231,21 +239,38 @@
            </spacer>
           </item>
           <item row="3" column="1">
-           <widget class="QLabel" name="labelODWithHoleApertue">
+           <widget class="QLabel" name="labelODWithTrialFrame">
             <property name="text">
              <string>still no value measured</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
           <item row="6" column="2">
-           <widget class="QLabel" name="label_2">
+           <widget class="QLabel" name="labelOSWithHoleAperture">
             <property name="text">
              <string>still no value measured</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
            <widget class="QPushButton" name="pushButtonODWithoutTrialFrame">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Visus OD without Trial Frame</string>
             </property>
@@ -253,27 +278,43 @@
           </item>
           <item row="5" column="1">
            <widget class="QPushButton" name="pushButtonODWithHoleAperture">
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Visus OD with Hole Aperture</string>
             </property>
            </widget>
           </item>
           <item row="1" column="2">
-           <widget class="QLabel" name="labelOSWithoutHoleApertue">
+           <widget class="QLabel" name="labelOSWithoutTrialFrame">
             <property name="text">
              <string>still no value measured</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
           <item row="3" column="2">
-           <widget class="QLabel" name="labelOSWithHoleApertue">
+           <widget class="QLabel" name="labelOSWithTrialFrame">
             <property name="text">
              <string>still no value measured</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
           <item row="5" column="2">
            <widget class="QPushButton" name="pushButtonOSWithHoleAperture">
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Visus OS with Hole Aperture</string>
             </property>
@@ -281,6 +322,23 @@
           </item>
           <item row="0" column="2">
            <widget class="QPushButton" name="pushButtonOSWithoutTrialFrame">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="baseSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Visus OS without Trial Frame</string>
             </property>
@@ -288,22 +346,61 @@
           </item>
           <item row="2" column="2">
            <widget class="QPushButton" name="pushButtonOSWithTrialFrame">
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Visus OS with Trial Frame</string>
             </property>
            </widget>
           </item>
           <item row="6" column="1">
-           <widget class="QLabel" name="label">
+           <widget class="QLabel" name="labelODWithHoleAperture">
             <property name="text">
              <string>still no value measured</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
           <item row="2" column="1">
            <widget class="QPushButton" name="pushButtonODWithTrialFrame">
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Visus OD with Trial Frame</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLabel" name="labelODWithHoleApertureMsg">
+            <property name="text">
+             <string>no measurement needed</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>no measurement needed</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -327,8 +424,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>566</width>
-        <height>456</height>
+        <width>686</width>
+        <height>773</height>
        </rect>
       </property>
       <attribute name="label">
