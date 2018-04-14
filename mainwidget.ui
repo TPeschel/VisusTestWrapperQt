@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>978</width>
+    <width>751</width>
     <height>869</height>
    </rect>
   </property>
@@ -35,7 +35,7 @@
       <enum>QFrame::Raised</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="pageInfo">
       <property name="geometry">
@@ -298,7 +298,7 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>958</width>
+        <width>731</width>
         <height>709</height>
        </rect>
       </property>
@@ -371,15 +371,82 @@
           <set>Qt::AlignCenter</set>
          </property>
          <layout class="QGridLayout" name="gridLayout_7">
-          <item row="6" column="0" colspan="2">
-           <widget class="QPushButton" name="pushButtonODWithTrialFrame">
+          <item row="17" column="0">
+           <widget class="QLabel" name="labelDVA5">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>dec. VA:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QLabel" name="labelLogMAR2">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>logMAR:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QLabel" name="labelDVA2">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>dec. VA:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="16" column="2" colspan="3">
+           <widget class="QPushButton" name="pushButtonOSWithHoleAperture">
             <property name="font">
              <font>
               <pointsize>16</pointsize>
              </font>
             </property>
             <property name="text">
-             <string>&amp;3 mit Messbrille</string>
+             <string>&amp;6  mit Messblende</string>
+            </property>
+           </widget>
+          </item>
+          <item row="16" column="0" colspan="2">
+           <widget class="QPushButton" name="pushButtonODWithHoleAperture">
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>&amp;5 mit Messblende</string>
+            </property>
+           </widget>
+          </item>
+          <item row="13" column="0" rowspan="2" colspan="6">
+           <widget class="Line" name="line">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="2">
+           <widget class="QLabel" name="labelDVA4">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>dec. VA:</string>
             </property>
            </widget>
           </item>
@@ -398,26 +465,14 @@
             </property>
            </widget>
           </item>
-          <item row="7" column="3">
-           <widget class="QLabel" name="labelDVA4">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>dec. VA:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="14" column="0" colspan="6">
+          <item row="21" column="0" colspan="6">
            <widget class="Line" name="line_3">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
            </widget>
           </item>
-          <item row="6" column="3" colspan="2">
+          <item row="8" column="2" colspan="3">
            <widget class="QPushButton" name="pushButtonOSWithTrialFrame">
             <property name="font">
              <font>
@@ -426,42 +481,6 @@
             </property>
             <property name="text">
              <string>&amp;4 mit Messbrille</string>
-            </property>
-           </widget>
-          </item>
-          <item row="7" column="0">
-           <widget class="QLabel" name="labelDVA3">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>dec. VA:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="3" colspan="2">
-           <widget class="QPushButton" name="pushButtonOSWithoutTrialFrame">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="baseSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>16</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>&amp;2 ohne Messbrille</string>
             </property>
            </widget>
           </item>
@@ -498,6 +517,85 @@
             </property>
            </widget>
           </item>
+          <item row="9" column="0">
+           <widget class="QLabel" name="labelDVA3">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>dec. VA:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2" colspan="3">
+           <widget class="QPushButton" name="pushButtonOSWithoutTrialFrame">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="baseSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>&amp;2 ohne Messbrille</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0" colspan="2">
+           <widget class="QPushButton" name="pushButtonODWithTrialFrame">
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>&amp;3 mit Messbrille</string>
+            </property>
+           </widget>
+          </item>
+          <item row="10" column="2">
+           <widget class="QLabel" name="labelLogMAR4">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>logMAR:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0" colspan="6">
+           <widget class="Line" name="line_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="10" column="0">
+           <widget class="QLabel" name="labelLogMAR3">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>logMAR:</string>
+            </property>
+           </widget>
+          </item>
           <item row="4" column="0">
            <widget class="QLabel" name="labelLogMAR1">
             <property name="font">
@@ -510,14 +608,7 @@
             </property>
            </widget>
           </item>
-          <item row="5" column="0" colspan="6">
-           <widget class="Line" name="line_2">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="1">
+          <item row="10" column="1">
            <widget class="QLabel" name="labelODWithTrialFrameLogMARVal">
             <property name="font">
              <font>
@@ -532,119 +623,10 @@
             </property>
            </widget>
           </item>
-          <item row="8" column="0">
-           <widget class="QLabel" name="labelLogMAR3">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>logMAR:</string>
-            </property>
-           </widget>
+          <item row="5" column="1">
+           <widget class="QLineEdit" name="lineEdit"/>
           </item>
-          <item row="2" column="5" rowspan="3">
-           <widget class="QPlainTextEdit" name="plainTextEdit_3"/>
-          </item>
-          <item row="11" column="2" rowspan="3">
-           <widget class="QPlainTextEdit" name="plainTextEdit_6"/>
-          </item>
-          <item row="11" column="0" colspan="2">
-           <widget class="QPushButton" name="pushButtonODWithHoleAperture">
-            <property name="font">
-             <font>
-              <pointsize>16</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>&amp;5 mit Messblende</string>
-            </property>
-           </widget>
-          </item>
-          <item row="9" column="0" rowspan="2" colspan="6">
-           <widget class="Line" name="line">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="11" column="5" rowspan="3">
-           <widget class="QPlainTextEdit" name="plainTextEdit_5"/>
-          </item>
-          <item row="3" column="3">
-           <widget class="QLabel" name="labelDVA2">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>dec. VA:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="3">
-           <widget class="QLabel" name="labelLogMAR2">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>logMAR:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="11" column="3" colspan="2">
-           <widget class="QPushButton" name="pushButtonOSWithHoleAperture">
-            <property name="font">
-             <font>
-              <pointsize>16</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>&amp;6  mit Messblende</string>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="3">
-           <widget class="QLabel" name="labelLogMAR4">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>logMAR:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="12" column="0">
-           <widget class="QLabel" name="labelDVA5">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>dec. VA:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="12" column="3">
-           <widget class="QLabel" name="labelDVA6">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>dec. VA:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="4">
+          <item row="10" column="4">
            <widget class="QLabel" name="labelOSWithTrialFrameLogMARVal">
             <property name="font">
              <font>
@@ -659,7 +641,73 @@
             </property>
            </widget>
           </item>
-          <item row="13" column="1">
+          <item row="17" column="2">
+           <widget class="QLabel" name="labelDVA6">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>dec. VA:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="labelCommentOD">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Kommentar</string>
+            </property>
+           </widget>
+          </item>
+          <item row="11" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Kommentar</string>
+            </property>
+           </widget>
+          </item>
+          <item row="19" column="2">
+           <widget class="QLabel" name="label_4">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Kommentar</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="4">
+           <widget class="QLineEdit" name="lineEdit_3"/>
+          </item>
+          <item row="19" column="4">
+           <widget class="QLineEdit" name="lineEdit_6"/>
+          </item>
+          <item row="11" column="2">
+           <widget class="QLabel" name="label_5">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Kommentar:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="18" column="1">
            <widget class="QLabel" name="labelODWithHoleApertureLogMARVal">
             <property name="font">
              <font>
@@ -674,7 +722,19 @@
             </property>
            </widget>
           </item>
-          <item row="13" column="4">
+          <item row="18" column="2">
+           <widget class="QLabel" name="labelLogMAR6">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>logMAR:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="18" column="4">
            <widget class="QLabel" name="labelOSWithHoleApertureLogMARVal">
             <property name="font">
              <font>
@@ -689,20 +749,8 @@
             </property>
            </widget>
           </item>
-          <item row="13" column="0">
+          <item row="18" column="0">
            <widget class="QLabel" name="labelLogMAR5">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>logMAR:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="13" column="3">
-           <widget class="QLabel" name="labelLogMAR6">
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -728,6 +776,51 @@
             </property>
            </widget>
           </item>
+          <item row="9" column="1">
+           <widget class="QLabel" name="labelODWithTrialFrameDVAVal">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>noch kein Wert gemessen</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="4">
+           <widget class="QLabel" name="labelOSWithTrialFrameDVAVal">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>noch kein Wert gemessen</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="17" column="1">
+           <widget class="QLabel" name="labelODWithHoleApertureDVAVal">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>keine Messung nötig</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
           <item row="3" column="1">
            <widget class="QLabel" name="labelODWithoutTrialFrameDVAVal">
             <property name="font">
@@ -743,52 +836,7 @@
             </property>
            </widget>
           </item>
-          <item row="7" column="1">
-           <widget class="QLabel" name="labelODWithTrialFrameDVAVal">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>noch kein Wert gemessen</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="7" column="4">
-           <widget class="QLabel" name="labelOSWithTrialFrameDVAVal">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>noch kein Wert gemessen</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="12" column="1">
-           <widget class="QLabel" name="labelODWithHoleApertureDVAVal">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>keine Messung nötig</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="12" column="4">
+          <item row="17" column="4">
            <widget class="QLabel" name="labelOSWithHoleApertureDVAVal">
             <property name="font">
              <font>
@@ -817,39 +865,6 @@
              <set>Qt::AlignCenter</set>
             </property>
            </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QLabel" name="labelCommentOD">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Kommentar</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="5">
-           <widget class="QLabel" name="labelCommentOS">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Kommentar</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="5" rowspan="3">
-           <widget class="QPlainTextEdit" name="plainTextEdit_4"/>
-          </item>
-          <item row="2" column="2" rowspan="3">
-           <widget class="QPlainTextEdit" name="plainTextEdit"/>
-          </item>
-          <item row="6" column="2" rowspan="3">
-           <widget class="QPlainTextEdit" name="plainTextEdit_2"/>
           </item>
           <item row="1" column="4">
            <widget class="QLabel" name="labelOS">
@@ -895,6 +910,39 @@
              <string>dec. VA:</string>
             </property>
            </widget>
+          </item>
+          <item row="19" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Kommentar</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="2">
+           <widget class="QLabel" name="labelCommentOS">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Kommentar</string>
+            </property>
+           </widget>
+          </item>
+          <item row="19" column="1">
+           <widget class="QLineEdit" name="lineEdit_5"/>
+          </item>
+          <item row="11" column="1">
+           <widget class="QLineEdit" name="lineEdit_4"/>
+          </item>
+          <item row="11" column="4">
+           <widget class="QLineEdit" name="lineEdit_2"/>
           </item>
          </layout>
         </widget>

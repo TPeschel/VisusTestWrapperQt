@@ -21,9 +21,19 @@ MainWidget::MainWidget(QWidget *parent) :
 {
 	ui->setupUi(this);
 
-    flashPlayerExe = ui->lineEditFlashplayerExe->text( );
-    fractSWF = ui->lineEditFrACTSWF->text( );
-    dataDir = ui->lineEditDataDir->text( );
+    csv_config.loadFromFile( "config.tsv", '\t', true );
+
+    //    flashPlayerExe = ui->lineEditFlashplayerExe->text( );
+    //    fractSWF = ui->lineEditFrACTSWF->text( );
+    //    dataDir = ui->lineEditDataDir->text( );
+
+    flashPlayerExe = csv_config[ 3 ];
+    fractSWF = csv_config[ 4 ];
+    dataDir = csv_config[ 5 ];
+
+    ui->lineEditFlashplayerExe->setText( flashPlayerExe );
+    ui->lineEditFrACTSWF->setText( fractSWF );
+    ui->lineEditDataDir->setText( dataDir );
 
     proc = 0;
 
@@ -49,17 +59,13 @@ MainWidget::MainWidget(QWidget *parent) :
     ui->toolBox->widget( 4 )->setEnabled( false );
     ui->toolBox->setCurrentIndex( 1 );
 
-    csv_output.name( "data.csv" );
-    csv_output.sep( "[\t\n\r]+" );
-    csv_output.loadFromFile( "data.csv" );
+    csv_output.loadFromFile( "data.csv", '\t' );
 }
 
 MainWidget::~MainWidget()
 {
 	delete ui;
 }
-
-
 
 void MainWidget::slotNewExamination( )
 {
@@ -227,7 +233,8 @@ void MainWidget::startFrACT( )
     proc->start( flashPlayerExe, arg ); //windows
 //    proc->start( "flash/start.bat" ); //windows
 //    proc->startDetached ( "flashplayer", arg ); //linux
-}
+    }
+
 
 void MainWidget::slotFrACTFinished( int exitCode )
 {
@@ -240,11 +247,9 @@ void MainWidget::slotFrACTFinished( int exitCode )
     txt = QApplication::clipboard( )->text( QClipboard::Clipboard );
 
     CSV
-    csv( "clipboard.csv" );
+    csv;
 
-    csv.sep( "[\t\n\r]+" );
-
-    csv.loadFromString( txt );
+    csv.loadFromString( txt, '\t', false, 6 );
 
     if( 0 < csv.size( ) && csv[ 0 ][ 0 ] == '2' ) {
 
@@ -318,13 +323,13 @@ void MainWidget::slotFrACTFinished( int exitCode )
 
         if( 0 == csv_output.size( ) ) {
 
-            csv_output.__items <<
+            csv_output <<
                 "SIC" << "\t" << "DATE" << "\t" << "TIME" << "\t" << "RESULT" << "\t" <<
                 "RESULT_UNIT" << "\t" << "OCULUS" << "\t" << "DETAILS" << "\t" << "TEST_NAME" <<
                 "\t" << "DISTANCE" << "\t" << "DISTANCE_UNIT" << "\t" << "nTrials" << "\n";
         }
 
-        csv_output.__items <<
+        csv_output <<
             currSIC << "\t" <<
             csv[ 0 ] << "\t" <<
             csv[ 1 ] << "\t" <<
@@ -337,7 +342,7 @@ void MainWidget::slotFrACTFinished( int exitCode )
             csv[ 6 ] << "\t" <<
             csv[ 7 ] << "\n";
 
-        ui->plainTextEditSummary->appendPlainText( csv.__items.join( "  " ) );
+        ui->plainTextEditSummary->appendPlainText( csv.items( ).join( "  " ) );
 
         switch ( currMode ) {
 
@@ -518,18 +523,21 @@ void MainWidget::slotStartFileDialoagForFlashPlayer()
 {
     flashPlayerExe = QFileDialog::getOpenFileName( this, tr( "Flash Player Projector" ), ".", tr("Exe Files (*.exe)" ) );
     ui->lineEditFlashplayerExe->setText( flashPlayerExe );
+    csv_config[ 3 ] = flashPlayerExe;
 }
 
 void MainWidget::slotStartFileDialoagForFractSWF()
 {
     fractSWF = QFileDialog::getOpenFileName( this, tr( "FrACT*.swf" ), ".", tr("SWF Files (*.swf)" ) );
     ui->lineEditFrACTSWF->setText( fractSWF );
+    csv_config[ 4 ] = fractSWF;
 }
 
 void MainWidget::slotStartFileDialoagForDataDir( )
 {
     dataDir = QFileDialog::getExistingDirectory( this, tr( "Daten Verzeichnis" ), tr( "." ), QFileDialog::ShowDirsOnly );
     ui->lineEditDataDir->setText( dataDir );
+    csv_config[ 5 ] = dataDir;
 }
 
 void MainWidget::closeEvent( QCloseEvent *p_closeEvent )
@@ -537,6 +545,7 @@ void MainWidget::closeEvent( QCloseEvent *p_closeEvent )
 
     p_closeEvent->accept( );
 //http://doc.qt.io/qt-5/qtxml-streambookmarks-example.html
-     csv_output.writeToFile( dataDir + "/data.csv" );
+     csv_output.writeToFile( "data.csv", '\t' );
+     csv_config.writeToFile( "consfig.tsv", '\t' );
     //MainWidget::closeEvent(p_closeEvent );
 }

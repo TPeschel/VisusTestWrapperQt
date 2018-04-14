@@ -81,6 +81,7 @@ class MainWidget : public QWidget {
     public:
 
         CSV
+        csv_config,
         csv_output;
 
         void startFrACT( );

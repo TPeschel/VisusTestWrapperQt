@@ -34,3 +34,6 @@ HEADERS += \
 
 FORMS += \
         mainwidget.ui
+
+DISTFILES += \
+    ../build-VisusTestWrapper-Desktop_Qt_5_10_1_MSVC2017_64bit-Release/release/config.tsv
