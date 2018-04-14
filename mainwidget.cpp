@@ -21,6 +21,10 @@ MainWidget::MainWidget(QWidget *parent) :
 {
 	ui->setupUi(this);
 
+    flashPlayerExe = ui->lineEditFlashplayerExe->text( );
+    fractSWF = ui->lineEditFrACTSWF->text( );
+    dataDir = ui->lineEditDataDir->text( );
+
     proc = 0;
 
     QObject::connect( ui->pushButtonNewExamination, SIGNAL(	released( ) ), this, SLOT( slotNewExamination( ) ) );
@@ -34,11 +38,16 @@ MainWidget::MainWidget(QWidget *parent) :
     QObject::connect( ui->pushButtonODWithHoleAperture, SIGNAL( released( ) ), this, SLOT( slotStartFrACTAcuity_LandoltCODWithHoleAperture( ) ) );
     QObject::connect( ui->pushButtonOSWithHoleAperture, SIGNAL( released( ) ), this, SLOT( slotStartFrACTAcuity_LandoltCOSWithHoleAperture( ) ) );
     QObject::connect( ui->pushButtonClose, SIGNAL( released( ) ), this, SLOT( close( ) ) );
+    QObject::connect( ui->toolButtonFlashPlayerExe, SIGNAL( released( ) ), this, SLOT( slotStartFileDialoagForFlashPlayer( ) ) );
+    QObject::connect( ui->toolButtonFrACTSWF, SIGNAL( released( ) ), this, SLOT( slotStartFileDialoagForFractSWF( ) ) );
+    QObject::connect( ui->toolButtonDataDir, SIGNAL( released( ) ), this, SLOT( slotStartFileDialoagForDataDir( ) ) );
 
     ui->toolBox->widget( 0 )->setEnabled( true );
-    ui->toolBox->widget( 1 )->setEnabled( false );
+    ui->toolBox->widget( 1 )->setEnabled( true );
     ui->toolBox->widget( 2 )->setEnabled( false );
     ui->toolBox->widget( 3 )->setEnabled( false );
+    ui->toolBox->widget( 4 )->setEnabled( false );
+    ui->toolBox->setCurrentIndex( 1 );
 
     csv_output.name( "data.csv" );
     csv_output.sep( "[\t\n\r]+" );
@@ -54,35 +63,52 @@ MainWidget::~MainWidget()
 
 void MainWidget::slotNewExamination( )
 {
-	ui->toolBox->setCurrentIndex( 1 );
-	ui->toolBox->setItemText( 0, "Running Examination" );
+    ui->toolBox->setCurrentIndex( 2 );
+    ui->toolBox->setItemText( 1, "Running Examination" );
     ui->lineEditSICVal->setFocus( );
     ui->lineEditSICVal->setText( "" );
+
+    ui->pushButtonODWithoutTrialFrame->setStyleSheet( "QPushButton { color : black; }" );
     ui->pushButtonODWithoutTrialFrame->setEnabled( true );
+
+    ui->pushButtonOSWithoutTrialFrame->setStyleSheet( "QPushButton { color : black; }" );
     ui->pushButtonOSWithoutTrialFrame->setEnabled( true );
+
+    ui->pushButtonODWithTrialFrame->setStyleSheet( "QPushButton { color : black; }" );
     ui->pushButtonODWithTrialFrame->setEnabled( true );
+
+    ui->pushButtonOSWithTrialFrame->setStyleSheet( "QPushButton { color : black; }" );
     ui->pushButtonOSWithTrialFrame->setEnabled( true );
+
+    ui->pushButtonODWithHoleAperture->setStyleSheet( "QPushButton { color : black; }" );
     ui->pushButtonODWithHoleAperture->setEnabled( false );
+
+    ui->pushButtonOSWithHoleAperture->setStyleSheet( "QPushButton { color : black; }" );
     ui->pushButtonOSWithHoleAperture->setEnabled( false );
-    ui->labelODWithoutTrialFrame->setText( "still no value measured" );
-    ui->labelOSWithoutTrialFrame->setText( "still no value measured" );
-    ui->labelODWithTrialFrame->setText( "still no value measured" );
-    ui->labelOSWithTrialFrame->setText( "still no value measured" );
-    ui->labelODWithHoleAperture->setText( "still no value measured" );
-    ui->labelOSWithHoleAperture->setText( "still no value measured" );
+/*
+    ui->labelODWithoutTrialFrame->setStyleSheet( "QLabel { color : black; }" );
+    ui->labelODWithoutTrialFrame->setText( "noch kein Wert gemessen" );
 
-    ui->pushButtonODWithHoleAperture->setEnabled( false );
-    ui->labelODWithHoleApertureMsg->setStyleSheet( "QLabel { color : black; }" );
-    ui->labelODWithHoleApertureMsg->setText( "no measurement needed" );
+    ui->labelOSWithoutTrialFrame->setStyleSheet( "QLabel { color : black; }" );
+    ui->labelOSWithoutTrialFrame->setText( "noch kein Wert gemessen" );
 
-    ui->pushButtonOSWithHoleAperture->setEnabled( false );
-    ui->labelOSWithHoleApertureMsg->setStyleSheet( "QLabel { color : black; }" );
-    ui->labelOSWithHoleApertureMsg->setText( "no measurement needed" );
+    ui->labelODWithTrialFrame->setStyleSheet( "QLabel { color : black; }" );
+    ui->labelODWithTrialFrame->setText( "noch kein Wert gemessen" );
 
-    ui->toolBox->widget( 0 )->setEnabled( false );
-    ui->toolBox->widget( 1 )->setEnabled( true );
-    ui->toolBox->widget( 2 )->setEnabled( false );
+    ui->labelOSWithTrialFrame->setStyleSheet( "QLabel { color : black; }" );
+    ui->labelOSWithTrialFrame->setText( "noch kein Wert gemessen" );
+
+    ui->labelODWithHoleAperture->setStyleSheet( "QLabel { color : black; }" );
+    ui->labelODWithHoleAperture->setText( "keine Messung nötig" );
+
+    ui->labelOSWithHoleAperture->setStyleSheet( "QLabel { color : black; }" );
+    ui->labelOSWithHoleAperture->setText( "keine Messung nötig" );
+*/
+
+    ui->toolBox->widget( 1 )->setEnabled( false );
+    ui->toolBox->widget( 2 )->setEnabled( true );
     ui->toolBox->widget( 3 )->setEnabled( false );
+    ui->toolBox->widget( 4 )->setEnabled( false );
 
     ui->lineEditSICVal->setFocus( );
 }
@@ -97,13 +123,13 @@ void MainWidget::slotScanSIC( )
     if( m.hasMatch( ) ) {
 
         currSIC = m.captured( ).toUpper( );
-        ui->toolBox->setItemText( 1, currSIC );
-        ui->toolBox->setCurrentIndex( 2 );
+        ui->toolBox->setItemText( 2, currSIC );
+        ui->toolBox->setCurrentIndex( 3 );
 
-        ui->toolBox->widget( 0 )->setEnabled( false );
         ui->toolBox->widget( 1 )->setEnabled( false );
-        ui->toolBox->widget( 2 )->setEnabled( true );
-        ui->toolBox->widget( 3 )->setEnabled( false );
+        ui->toolBox->widget( 2 )->setEnabled( false );
+        ui->toolBox->widget( 3 )->setEnabled( true );
+        ui->toolBox->widget( 4 )->setEnabled( false );
 
         ui->pushButtonODWithoutTrialFrame->setFocus( );
     }
@@ -111,26 +137,70 @@ void MainWidget::slotScanSIC( )
 
 void MainWidget::slotFinishExamination( )
 {
-    ui->toolBox->setItemText( 0, "Complete Examination" );
-    ui->toolBox->setCurrentIndex( 3 );
+    ui->toolBox->setItemText( 1, "Complete Examination" );
+    ui->toolBox->setCurrentIndex( 4 );
 
-    ui->toolBox->widget( 0 )->setEnabled( false );
     ui->toolBox->widget( 1 )->setEnabled( false );
     ui->toolBox->widget( 2 )->setEnabled( false );
-    ui->toolBox->widget( 3 )->setEnabled( true );
+    ui->toolBox->widget( 3 )->setEnabled( false );
+    ui->toolBox->widget( 4 )->setEnabled( true );
 }
 
 void MainWidget::slotNextExamination( )
 {
-    ui->toolBox->setCurrentIndex( 0 );
-    ui->toolBox->widget( 0 )->setEnabled( true );
-    ui->toolBox->widget( 1 )->setEnabled( false );
+    ui->toolBox->setCurrentIndex( 1 );
+    ui->toolBox->widget( 1 )->setEnabled( true );
     ui->toolBox->widget( 2 )->setEnabled( false );
     ui->toolBox->widget( 3 )->setEnabled( false );
+    ui->toolBox->widget( 4 )->setEnabled( false );
 
-    ui->toolBox->setItemText( 0, "New Examination" );
-    ui->toolBox->setItemText( 1, "New Proband" );
+    ui->toolBox->setItemText( 1, "New Examination" );
+    ui->toolBox->setItemText( 2, "New Proband" );
     ui->lineEditSICVal->setText( "" );
+
+    ui->pushButtonODWithoutTrialFrame->setStyleSheet( "QPushButton { color : black; }" );
+    ui->pushButtonOSWithoutTrialFrame->setStyleSheet( "QPushButton { color : black; }" );
+
+    ui->pushButtonODWithTrialFrame->setStyleSheet( "QPushButton { color : black; }" );
+    ui->pushButtonOSWithTrialFrame->setStyleSheet( "QPushButton { color : black; }" );
+
+    ui->pushButtonODWithHoleAperture->setStyleSheet( "QPushButton { color : black; }" );
+    ui->pushButtonOSWithHoleAperture->setStyleSheet( "QPushButton { color : black; }" );
+
+    ui->labelODWithoutTrialFrameDVAVal->setStyleSheet( "QLabel { color : black; }" );
+    ui->labelODWithoutTrialFrameDVAVal->setText( "noch kein Wert gemessen" );
+    ui->labelODWithoutTrialFrameLogMARVal->setStyleSheet( "QLabel { color : black; }" );
+    ui->labelODWithoutTrialFrameLogMARVal->setText( "noch kein Wert gemessen" );
+
+    ui->labelOSWithoutTrialFrameDVAVal->setStyleSheet( "QLabel { color : black; }" );
+    ui->labelOSWithoutTrialFrameDVAVal->setText( "noch kein Wert gemessen" );
+    ui->labelOSWithoutTrialFrameLogMARVal->setStyleSheet( "QLabel { color : black; }" );
+    ui->labelOSWithoutTrialFrameLogMARVal->setText( "noch kein Wert gemessen" );
+
+    ui->labelODWithTrialFrameDVAVal->setStyleSheet( "QLabel { color : black; }" );
+    ui->labelODWithTrialFrameDVAVal->setText( "noch kein Wert gemessen" );
+    ui->labelODWithTrialFrameLogMARVal->setStyleSheet( "QLabel { color : black; }" );
+    ui->labelODWithTrialFrameLogMARVal->setText( "noch kein Wert gemessen" );
+
+    ui->labelOSWithTrialFrameDVAVal->setStyleSheet( "QLabel { color : black; }" );
+    ui->labelOSWithTrialFrameDVAVal->setText( "noch kein Wert gemessen" );
+    ui->labelOSWithTrialFrameLogMARVal->setStyleSheet( "QLabel { color : black; }" );
+    ui->labelOSWithTrialFrameLogMARVal->setText( "noch kein Wert gemessen" );
+
+    ui->labelODWithHoleApertureDVAVal->setStyleSheet( "QLabel { color : black; }" );
+    ui->labelODWithHoleApertureDVAVal->setText( "keine Messung nötig" );
+    ui->labelODWithHoleApertureLogMARVal->setStyleSheet( "QLabel { color : black; }" );
+    ui->labelODWithHoleApertureLogMARVal->setText( "keine Messung nötig" );
+
+    ui->labelOSWithHoleApertureDVAVal->setStyleSheet( "QLabel { color : black; }" );
+    ui->labelOSWithHoleApertureDVAVal->setText( "keine Messung nötig" );
+    ui->labelOSWithHoleApertureLogMARVal->setStyleSheet( "QLabel { color : black; }" );
+    ui->labelOSWithHoleApertureLogMARVal->setText( "keine Messung nötig" );
+
+    ui->pushButtonODWithHoleAperture->setStyleSheet( "QPushButton { color : black; }" );
+    ui->pushButtonOSWithHoleAperture->setStyleSheet( "QPushButton { color : black; }" );
+
+    ui->plainTextEditSummary->clear( );
 }
 
 void MainWidget::startFrACT( )
@@ -148,15 +218,15 @@ void MainWidget::startFrACT( )
     QStringList
     arg;
 
-    arg << "FrACT3.9.8.swf";
+    //arg << "http://www.michaelbach.de/fract/versions/FrACT3.10.0d.swf";
+    //arg << "C:/Users/Thomas Peschel/Documents/dev/c++/life/Franziska/github.com/TPeschel/VisusTestWrapperQt/release/flash/FrACT3.10.0d.swf";
+    arg << fractSWF;
+    //proc->setWorkingDirectory ( "C:/Users/Thomas Peschel/Documents/dev/c++/life/Franziska/github.com/TPeschel/VisusWarapperQt/release/" );
+    proc->setWorkingDirectory ( dataDir );
 
-//    proc->setWorkingDirectory ( "C:/Users/Thomas Peschel/Documents/dev/c++/life/Franziska/github.com/TPeschel/build-VisusTestWrapper-Desktop_Qt_5_10_1_MinGW_32bit-Debug" );
-    proc->setWorkingDirectory ( "." );
-
-    //proc->start( "FrACT3.9.9a.exe" );
-
-    proc->start( "flashplayer_29_sa.exe", arg ); //windows
-//    proc->startDetached ( "./flashplayer", arg ); //linux
+    proc->start( flashPlayerExe, arg ); //windows
+//    proc->start( "flash/start.bat" ); //windows
+//    proc->startDetached ( "flashplayer", arg ); //linux
 }
 
 void MainWidget::slotFrACTFinished( int exitCode )
@@ -179,25 +249,30 @@ void MainWidget::slotFrACTFinished( int exitCode )
     if( 0 < csv.size( ) && csv[ 0 ][ 0 ] == '2' ) {
 
         QStringList
-        datetime;
+        date,
+        time;
 
-        datetime << csv[ 0 ].split( '-' ) << csv[ 1 ].split( ':' );
+        date << csv[ 0 ].split( '-' );
+        time << csv[ 1 ].split( ':' );
 
         QString
-        dt = datetime.join( "-" );
+        dt = date.join( "" ) + "-" + time.join( "" );
 
         QStringList
         msl = modeStrings[ currMode ].split( "_PLACEHOLDER_" );
 
         QFile
-        f( currSIC + "-" + dt + "-" + msl[ 0 ] + "-" + msl[ 1 ] + ".csv" );
+        fileResult( dataDir + "/" + currSIC + "-" + dt + "-Acuity_LandoltC-" + msl[ 0 ] + "-" + msl[ 1 ] + "result.csv" );
 
-        if( f.open( QIODevice::WriteOnly | QIODevice::Text ) ) {
+        if( fileResult.open( QIODevice::WriteOnly | QIODevice::Text ) ) {
 
             QTextStream
-            ts( &f );
+            ts( &fileResult );
 
             ts <<
+                "SIC" << "\t" << "DATE" << "\t" << "TIME" << "\t" << "RESULT" << "\t" <<
+                "RESULT_UNIT" << "\t" << "OCULUS" << "\t" << "DETAILS" << "\t" << "TEST_NAME" <<
+                "\t" << "DISTANCE" << "\t" << "DISTANCE_UNIT" << "\t" << "nTrials" << "\n" <<
                 currSIC << "\t" <<
                 csv[ 0 ] << "\t" <<
                 csv[ 1 ] << "\t" <<
@@ -208,23 +283,45 @@ void MainWidget::slotFrACTFinished( int exitCode )
                 csv[ 4 ] << "\t" <<
                 csv[ 5 ] << "\t" <<
                 csv[ 6 ] << "\t" <<
-                csv[ 7 ] << "\t" <<
-                csv[ 8 ] << "\t" <<
-                csv[ 9 ] << "\t" <<
-                csv[ 10 ] << "\t" <<
-                csv[ 11 ] << "\t" <<
-                csv[ 12 ] << "\n";
+                csv[ 7 ] << "\n";
 
-            int i = 12;
+            fileResult.close( );
+        }
 
-            while( ++i < csv.__items.length( ) ) {
+        if( 12 < csv.size( ) ) {
 
-                ts << csv[ i ];
+            QFile
+            fileData( dataDir + "/" + currSIC + "-" + dt + "-Acuity_LandoltC-" + msl[ 0 ] + "-" + msl[ 1 ] + "data.csv" );
 
-                ts << ( ( i - 13 ) % 6 < 5 ? "\t" : "\n" );
+            if( fileData.open( QIODevice::WriteOnly | QIODevice::Text ) ) {
+
+                QTextStream
+                ts( &fileData );
+
+                if( ts.atEnd( ) ) {
+                    ts <<
+                          "TRIAL" << "\t" << "VALUE" << "\t" <<
+                          "ORIENTATION_ANGLE_PRESENTED[DEG]" << "\t" << "ORIENTATION_ANGLE_RESPONDED[DEG]" <<
+                          "\t" << "CORRECTNESS[1YES0NO]" << "\t" << "REACTION_TIME[MS]" << "\n";
+                }
+
+                for( int i = 13; i < csv.size( ); ++ i ) {
+
+                    ts << csv[ i ];
+
+                    ts << ( ( i - 13 ) % 6 < 5 ? "\t" : "\n" );
+                }
+
+                fileData.close( );
             }
+        }
 
-            f.close( );
+        if( 0 == csv_output.size( ) ) {
+
+            csv_output.__items <<
+                "SIC" << "\t" << "DATE" << "\t" << "TIME" << "\t" << "RESULT" << "\t" <<
+                "RESULT_UNIT" << "\t" << "OCULUS" << "\t" << "DETAILS" << "\t" << "TEST_NAME" <<
+                "\t" << "DISTANCE" << "\t" << "DISTANCE_UNIT" << "\t" << "nTrials" << "\n";
         }
 
         csv_output.__items <<
@@ -238,12 +335,7 @@ void MainWidget::slotFrACTFinished( int exitCode )
             csv[ 4 ] << "\t" <<
             csv[ 5 ] << "\t" <<
             csv[ 6 ] << "\t" <<
-            csv[ 7 ] << "\t" <<
-            csv[ 8 ] << "\t" <<
-            csv[ 9 ] << "\t" <<
-            csv[ 10 ] << "\t" <<
-            csv[ 11 ] << "\t" <<
-            csv[ 12 ] << "\n";
+            csv[ 7 ] << "\n";
 
         ui->plainTextEditSummary->appendPlainText( csv.__items.join( "  " ) );
 
@@ -251,19 +343,26 @@ void MainWidget::slotFrACTFinished( int exitCode )
 
             case ODWithoutTrialFrame : {
 
-                ui->labelODWithoutTrialFrame->setText( csv[ 2 ] );
+                ui->pushButtonODWithoutTrialFrame->setStyleSheet( "QPushButton { color : green; }" );
+                ui->labelODWithoutTrialFrameDVAVal->setStyleSheet( "QLabel { color : green; }" );
+                ui->labelODWithoutTrialFrameDVAVal->setText( csv[ 2 ] );
+                ui->labelODWithoutTrialFrameLogMARVal->setStyleSheet( "QLabel { color : green; }" );
+                ui->labelODWithoutTrialFrameLogMARVal->setText( QString( "%1" ).arg( -log10( csv[ 2 ].toDouble( ) ) ) );
 
-                if( ui->labelODWithTrialFrame->text( )[ 0 ] != 's' ) {
+
+                if( ui->labelODWithTrialFrameDVAVal->text( )[ 0 ] != 'n' ) {
 
                     double
-                    oDWithTF    = ui->labelODWithTrialFrame->text( ).toDouble( ),
-                    oDWithoutTF = ui->labelODWithoutTrialFrame->text( ).toDouble( );
+                    oDWithTF    = ui->labelODWithTrialFrameDVAVal->text( ).toDouble( ),
+                    oDWithoutTF = ui->labelODWithoutTrialFrameDVAVal->text( ).toDouble( );
 
                     if( oDWithoutTF > oDWithTF ) {
 
                         ui->pushButtonODWithHoleAperture->setEnabled( true );
-                        ui->labelODWithHoleApertureMsg->setStyleSheet( "QLabel { color : red; }" );
-                        ui->labelODWithHoleApertureMsg->setText( "Measurement without trial frame is better than the one without.\nPlease measure now with hole aperture!" );
+                        ui->labelODWithHoleApertureDVAVal->setStyleSheet( "QLabel { color : red; }" );
+                        ui->labelODWithHoleApertureDVAVal->setText( "Die Messung ohne Messbrille ist besser als die ohne." );
+                        ui->labelODWithHoleApertureLogMARVal->setStyleSheet( "QLabel { color : red; }" );
+                        ui->labelODWithHoleApertureLogMARVal->setText( "Bitte messen Sie nun mit Messblende!" );
                     }
                 }
 
@@ -272,19 +371,25 @@ void MainWidget::slotFrACTFinished( int exitCode )
 
             case OSWithoutTrialFrame : {
 
-                ui->labelOSWithoutTrialFrame->setText( csv[ 2 ] );
+                ui->pushButtonOSWithoutTrialFrame->setStyleSheet( "QPushButton { color : green; }" );
+                ui->labelOSWithoutTrialFrameDVAVal->setStyleSheet( "QLabel { color : green; }" );
+                ui->labelOSWithoutTrialFrameDVAVal->setText( csv[ 2 ] );
+                ui->labelOSWithoutTrialFrameLogMARVal->setStyleSheet( "QLabel { color : green; }" );
+                ui->labelOSWithoutTrialFrameLogMARVal->setText( QString( "%1" ).arg( -log10( csv[ 2 ].toDouble( ) ) ) );
 
-                if( ui->labelOSWithTrialFrame->text( )[ 0 ] != 's' ) {
+                if( ui->labelOSWithTrialFrameDVAVal->text( )[ 0 ] != 'n' ) {
 
                     double
-                    oSWithTF    = ui->labelOSWithTrialFrame->text( ).toDouble( ),
-                    oSWithoutTF = ui->labelOSWithoutTrialFrame->text( ).toDouble( );
+                    oSWithTF    = ui->labelOSWithTrialFrameDVAVal->text( ).toDouble( ),
+                    oSWithoutTF = ui->labelOSWithoutTrialFrameDVAVal->text( ).toDouble( );
 
                     if( oSWithoutTF > oSWithTF ) {
 
                         ui->pushButtonOSWithHoleAperture->setEnabled( true );
-                        ui->labelOSWithHoleApertureMsg->setStyleSheet( "QLabel { color : red; }" );
-                        ui->labelOSWithHoleApertureMsg->setText( "Measurement without trial frame is better than the one without.\nPlease measure now with hole aperture!" );
+                        ui->labelOSWithHoleApertureDVAVal->setStyleSheet( "QLabel { color : red; }" );
+                        ui->labelOSWithHoleApertureDVAVal->setText( "Die Messung ohne Messbrille ist besser als die ohne." );
+                        ui->labelOSWithHoleApertureLogMARVal->setStyleSheet( "QLabel { color : red; }" );
+                        ui->labelOSWithHoleApertureLogMARVal->setText( "Bitte messen Sie nun mit Messblende!" );
                     }
                 }
 
@@ -293,19 +398,25 @@ void MainWidget::slotFrACTFinished( int exitCode )
 
             case ODWithTrialFrame : {
 
-                ui->labelODWithTrialFrame->setText( csv[ 2 ] );
+                ui->pushButtonODWithTrialFrame->setStyleSheet( "QPushButton { color : green; }" );
+                ui->labelODWithTrialFrameDVAVal->setStyleSheet( "QLabel { color : green; }" );
+                ui->labelODWithTrialFrameDVAVal->setText( csv[ 2 ] );
+                ui->labelODWithTrialFrameLogMARVal->setStyleSheet( "QLabel { color : green; }" );
+                ui->labelODWithTrialFrameLogMARVal->setText( QString( "%1" ).arg( -log10( csv[ 2 ].toDouble( ) ) ) );
 
-                if( ui->labelODWithoutTrialFrame->text( )[ 0 ] != 's' ) {
+                if( ui->labelODWithoutTrialFrameDVAVal->text( )[ 0 ] != 's' ) {
 
                     double
-                    oDWithTF    = ui->labelODWithTrialFrame->text( ).toDouble( ),
-                    oDWithoutTF = ui->labelODWithoutTrialFrame->text( ).toDouble( );
+                    oDWithTF    = ui->labelODWithTrialFrameDVAVal->text( ).toDouble( ),
+                    oDWithoutTF = ui->labelODWithoutTrialFrameDVAVal->text( ).toDouble( );
 
                     if( oDWithoutTF > oDWithTF ) {
 
                         ui->pushButtonODWithHoleAperture->setEnabled( true );
-                        ui->labelODWithHoleApertureMsg->setStyleSheet( "QLabel { color : red; }" );
-                        ui->labelODWithHoleApertureMsg->setText( "Measurement without trial frame is better than the one without.\nPlease measure now with hole aperture!" );
+                        ui->labelODWithHoleApertureDVAVal->setStyleSheet( "QLabel { color : red; }" );
+                        ui->labelODWithHoleApertureDVAVal->setText( "Die Messung ohne Messbrille ist besser als die ohne." );
+                        ui->labelODWithHoleApertureLogMARVal->setStyleSheet( "QLabel { color : red; }" );
+                        ui->labelODWithHoleApertureLogMARVal->setText( "Bitte messen Sie nun mit Messblende!" );
                     }
                 }
 
@@ -314,19 +425,25 @@ void MainWidget::slotFrACTFinished( int exitCode )
 
             case OSWithTrialFrame : {
 
-                ui->labelOSWithTrialFrame->setText( csv[ 2 ] );
+                ui->pushButtonOSWithTrialFrame->setStyleSheet( "QPushButton { color : green; }" );
+                ui->labelOSWithTrialFrameDVAVal->setStyleSheet( "QLabel { color : green; }" );
+                ui->labelOSWithTrialFrameDVAVal->setText( csv[ 2 ] );
+                ui->labelOSWithTrialFrameLogMARVal->setStyleSheet( "QLabel { color : green; }" );
+                ui->labelOSWithTrialFrameLogMARVal->setText( QString( "%1" ).arg( -log10( csv[ 2 ].toDouble( ) ) ) );
 
-                if( ui->labelOSWithoutTrialFrame->text( )[ 0 ] != 's' ) {
+                if( ui->labelOSWithoutTrialFrameDVAVal->text( )[ 0 ] != 's' ) {
 
                     double
-                    oSWithTF    = ui->labelOSWithTrialFrame->text( ).toDouble( ),
-                    oSWithoutTF = ui->labelOSWithoutTrialFrame->text( ).toDouble( );
+                    oSWithTF    = ui->labelOSWithTrialFrameDVAVal->text( ).toDouble( ),
+                    oSWithoutTF = ui->labelOSWithoutTrialFrameDVAVal->text( ).toDouble( );
 
                     if( oSWithoutTF > oSWithTF ) {
 
                         ui->pushButtonOSWithHoleAperture->setEnabled( true );
-                        ui->labelOSWithHoleApertureMsg->setStyleSheet( "QLabel { color : red; }" );
-                        ui->labelOSWithHoleApertureMsg->setText( "Measurement without trial frame is better than the one without.\nPlease measure now with hole aperture!" );
+                        ui->labelOSWithHoleApertureDVAVal->setStyleSheet( "QLabel { color : red; }" );
+                        ui->labelOSWithHoleApertureDVAVal->setText( "Die Messung ohne Messbrille ist besser als die ohne." );
+                        ui->labelOSWithHoleApertureLogMARVal->setStyleSheet( "QLabel { color : red; }" );
+                        ui->labelOSWithHoleApertureLogMARVal->setText( "Bitte messen Sie nun mit Messblende!" );
                     }
                 }
 
@@ -335,14 +452,22 @@ void MainWidget::slotFrACTFinished( int exitCode )
 
             case ODWithHoleAperture : {
 
-                ui->labelODWithHoleAperture->setText( csv[ 2 ] );
+                ui->pushButtonODWithHoleAperture->setStyleSheet( "QPushButton { color : green; }" );
+                ui->labelODWithHoleApertureDVAVal->setStyleSheet( "QLabel { color : green; }" );
+                ui->labelODWithHoleApertureDVAVal->setText( csv[ 2 ] );
+                ui->labelODWithHoleApertureLogMARVal->setStyleSheet( "QLabel { color : green; }" );
+                ui->labelODWithHoleApertureLogMARVal->setText( QString( "%1" ).arg( -log10( csv[ 2 ].toDouble( ) ) ) );
 
                 break;
             }
 
             case OSWithHoleAperture : {
 
-                ui->labelOSWithHoleAperture->setText( csv[ 2 ] );
+                ui->pushButtonOSWithHoleAperture->setStyleSheet( "QPushButton { color : green; }" );
+                ui->labelOSWithHoleApertureDVAVal->setStyleSheet( "QLabel { color : green; }" );
+                ui->labelOSWithHoleApertureDVAVal->setText( csv[ 2 ] );
+                ui->labelOSWithHoleApertureLogMARVal->setStyleSheet( "QLabel { color : green; }" );
+                ui->labelOSWithHoleApertureLogMARVal->setText( QString( "%1" ).arg( -log10( csv[ 2 ].toDouble( ) ) ) );
 
                 break;
             }
@@ -365,7 +490,7 @@ void MainWidget::slotStartFrACTAcuity_LandoltCOSWithoutTrialFrame()
     startFrACT( );
 }
 
-void MainWidget::slotStartFrACTAcuity_LandoltCODWithTrialFrame()
+void MainWidget::slotStartFrACTAcuity_LandoltCODWithTrialFrame( )
 {
     currMode = ODWithTrialFrame;
     startFrACT( );
@@ -389,11 +514,29 @@ void MainWidget::slotStartFrACTAcuity_LandoltCOSWithHoleAperture()
     startFrACT( );
 }
 
+void MainWidget::slotStartFileDialoagForFlashPlayer()
+{
+    flashPlayerExe = QFileDialog::getOpenFileName( this, tr( "Flash Player Projector" ), ".", tr("Exe Files (*.exe)" ) );
+    ui->lineEditFlashplayerExe->setText( flashPlayerExe );
+}
+
+void MainWidget::slotStartFileDialoagForFractSWF()
+{
+    fractSWF = QFileDialog::getOpenFileName( this, tr( "FrACT*.swf" ), ".", tr("SWF Files (*.swf)" ) );
+    ui->lineEditFrACTSWF->setText( fractSWF );
+}
+
+void MainWidget::slotStartFileDialoagForDataDir( )
+{
+    dataDir = QFileDialog::getExistingDirectory( this, tr( "Daten Verzeichnis" ), tr( "." ), QFileDialog::ShowDirsOnly );
+    ui->lineEditDataDir->setText( dataDir );
+}
+
 void MainWidget::closeEvent( QCloseEvent *p_closeEvent )
 {
 
     p_closeEvent->accept( );
 //http://doc.qt.io/qt-5/qtxml-streambookmarks-example.html
-     csv_output.writeToFile( "data.csv" );
+     csv_output.writeToFile( dataDir + "/data.csv" );
     //MainWidget::closeEvent(p_closeEvent );
 }

@@ -1,0 +1,1 @@
+C:\TP\Qt\5.10.1\msvc2017_64\bin\windeployqt.exe VisusTestWrapper.exe

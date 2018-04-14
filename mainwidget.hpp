@@ -2,6 +2,7 @@
 #define MAINWIDGET_HPP
 
 #include <QWidget>
+#include <QFileDialog>
 #include <QProcess>
 #include <QClipboard>
 #include <QCloseEvent>
@@ -39,6 +40,9 @@ class MainWidget : public QWidget {
     public:
 
         QString
+        flashPlayerExe,
+        fractSWF,
+        dataDir,
         currSIC;
 
         enum Acuity_LandoltCModes {
@@ -65,6 +69,10 @@ class MainWidget : public QWidget {
         void slotStartFrACTAcuity_LandoltCOSWithTrialFrame( );
         void slotStartFrACTAcuity_LandoltCODWithHoleAperture( );
         void slotStartFrACTAcuity_LandoltCOSWithHoleAperture( );
+        void slotStartFileDialoagForFlashPlayer( );
+        void slotStartFileDialoagForFractSWF( );
+        void slotStartFileDialoagForDataDir( );
+
 
     public:
 

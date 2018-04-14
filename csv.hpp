@@ -77,7 +77,7 @@ public QObject {
                 QString
                 txt = csv_file.readAll( );
 
-                __items.append( txt.split( QRegExp( __sep ), QString::KeepEmptyParts ) );
+                __items.append( txt.split( QRegExp( __sep ), QString::SkipEmptyParts ) );
 
                 csv_file.close( );
 
@@ -103,7 +103,7 @@ public QObject {
         void
         loadFromString( QString const &p_text ) {
 
-            __items.append( p_text.split( QRegExp( __sep ), QString::KeepEmptyParts ) );
+            __items.append( p_text.split( QRegExp( __sep ), QString::SkipEmptyParts ) );
 //            __items.append( p_text.split( __sep ) );
         }
 
